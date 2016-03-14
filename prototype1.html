@@ -1,0 +1,33 @@
+<html>
+ <meta charset="utf-8">
+<header>最基本的原型链</header>
+<body>
+	<script type="text/javascript">
+	  //这是最基本的原形继承
+	  //优点是简单,缺点是如果子类需要做跟父类构造函数中相同的初始化动作，
+	  //需要在子类的构造函数中再重新做一遍，例如：Child中初始化name
+
+       var Parent=function(name){
+       	  this.name=name || "parent";
+       }
+
+       Parent.prototype.getName=function(){
+       	  return this.name;
+       }
+
+       var Child=function(name,age){
+       	   this.name=name;
+       	   this.age=age;
+       }
+
+       Child.prototype=new Parent();//通过此种方法继承
+
+       var parent=new Parent("this is a parent");
+       var child=new Child("I'm a child",22);
+       console.log(parent.getName());
+       console.log(child.getName());
+       console.log(child.age);
+       
+	</script>
+</body>
+</html>

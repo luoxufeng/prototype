@@ -1,0 +1,38 @@
+<html>
+ <meta charset="utf-8">
+<header>最基本的原型链</header>
+<body>
+	<script type="text/javascript">
+	  var Parent=function(name){
+              this.name=name || "parent";
+         }
+
+         Parent.prototype.getName=function(){
+              return this.name;
+         }
+
+         Parent.prototype.obj={a:1};
+
+        
+         var Child=function(name,age){
+              //通过apply调用父类构造函数进行初始化工作
+              //这样不管父类执行多少初始化工作，子类也可以执行同样的初始化工作
+              Parent.apply(this,arguments);
+              this.age=age;
+         }
+
+         Child.prototype=new Parent();
+         //Child.prototype=Parent.prototype;
+
+         var child=new Child("alice",22);
+         var parent=new Parent("stone");
+         console.log(child.getName());
+         console.log(parent.getName());
+
+         Child.prototype.obj.a=26;
+         console.log(child.obj.a);
+         console.log(parent.obj.a);
+
+	</script>
+</body>
+</html>
